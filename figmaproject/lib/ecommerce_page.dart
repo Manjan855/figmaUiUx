@@ -16,18 +16,18 @@ class _EcommercePageState extends State<EcommercePage> {
   final List<EcommerceModel> ecommercePages = [
     EcommerceModel(title: "Welcome to", title2: "", image: "assets/figma1.png"),
     EcommerceModel(
-      title: "Buy Quality ",
+      title: "Buy Quality",
       title2: "Dairy Products",
       image: "assets/markus.png",
     ),
     EcommerceModel(
-      title: "Buy Quality ",
+      title: "Buy Quality",
       title2: "Premium Products",
       image: "assets/markus3.png",
     ),
     EcommerceModel(
       title: "Get Discounts",
-      title2: " On All products",
+      title2: "On All products",
       image: "assets/markus2.png",
     ),
   ];
@@ -35,28 +35,44 @@ class _EcommercePageState extends State<EcommercePage> {
   @override
   void initState() {
     super.initState();
-
-    /// Change status bar color
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.white12,
         statusBarIconBrightness: Brightness.light,
       ),
     );
+    _checkIfSeenOnboarding();
+  }
+
+  Future<void> _checkIfSeenOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool seen = prefs.getBool('seenOnboarding') ?? false;
+    if (seen) {
+      _goToHome();
+    }
+  }
+
+  Future<void> _setSeenOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('seenOnboarding', true);
+  }
+
+  void _goToHome() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-
-    /// Restore default status bar
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
       ),
     );
-
     super.dispose();
   }
 
@@ -73,22 +89,17 @@ class _EcommercePageState extends State<EcommercePage> {
           PageView.builder(
             controller: _pageController,
             itemCount: ecommercePages.length,
-            onPageChanged: (index) {
-              setState(() => currentIndex = index);
-            },
+            onPageChanged: (index) => setState(() => currentIndex = index),
             itemBuilder: (context, index) {
               final page = ecommercePages[index];
-
               return Stack(
                 children: [
-                  /// Background image
                   Image.asset(
                     page.image,
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
                   ),
-
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 96, left: 47),
@@ -106,10 +117,7 @@ class _EcommercePageState extends State<EcommercePage> {
                               ),
                             ),
                           ),
-
                           const SizedBox(height: 16),
-
-                          /// Description
                           if (page.title2.isNotEmpty)
                             Text(
                               page.title2,
@@ -118,16 +126,13 @@ class _EcommercePageState extends State<EcommercePage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-
                           if (index == 0)
                             Image.asset(
                               "assets/bigCart.png",
                               width: 127,
                               height: 50,
                             ),
-
                           const SizedBox(height: 20),
-
                           const Column(
                             children: [
                               Text("Lorem ipsum dolor sit amet, consetetur"),
@@ -142,7 +147,6 @@ class _EcommercePageState extends State<EcommercePage> {
               );
             },
           ),
-
           Positioned(
             bottom: 120,
             left: 0,
@@ -161,23 +165,39 @@ class _EcommercePageState extends State<EcommercePage> {
               ),
             ),
           ),
-
           Positioned(
             bottom: 50,
             left: 0,
             right: 0,
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
                 if (currentIndex < ecommercePages.length - 1) {
                   _pageController.nextPage(
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
                   );
                 } else {
-                  debugPrint("Go to Login / Home");
+                  await _setSeenOnboarding();
+                  _goToHome();
                 }
               },
-              child: Image.asset("assets/primaryButton.png", height: 50),
+              child: SizedBox(
+                height: 50,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset("assets/rectangle.png", fit: BoxFit.cover),
+                    const Text(
+                      "Get Started",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
@@ -186,16 +206,27 @@ class _EcommercePageState extends State<EcommercePage> {
   }
 }
 
+class SharedPreferences {
+  static Future getInstance() async {}
+}
+
 class EcommerceModel {
   final String title;
-
   final String title2;
   final String image;
 
   EcommerceModel({
     required this.title,
-
     required this.title2,
     required this.image,
   });
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text("Home Page")));
+  }
 }
