@@ -49,7 +49,7 @@ class _EcommercePageState extends State<EcommercePage> {
         statusBarIconBrightness: Brightness.light,
       ),
     );
-    Future.delayed(Duration(seconds: 4)).then((_) {
+    Future.delayed(Duration(seconds: 5)).then((_) {
       _checkIfSeenOnboarding();
     });
   }
@@ -172,35 +172,38 @@ class _EcommercePageState extends State<EcommercePage> {
             bottom: 50,
             left: 0,
             right: 0,
-            child: GestureDetector(
-              onTap: () async {
-                final prefs = await SharedPreferences.getInstance();
-                prefs.setBool('seenOnboarding', true);
-                if (currentIndex < ecommercePages.length - 1) {
-                  _pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                } else {
-                  await prefs.setBool('seenOnboarding', true);
-                  Get.offAll(() => const Auth1Login());
-                }
-              },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 17, right: 17, bottom: 36),
               child: SizedBox(
                 height: 50,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset("assets/rectangle.png", fit: BoxFit.cover),
-                    const Text(
-                      "Get Started",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ],
+                    backgroundColor: const Color(0xFF6CC51D),
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () async {
+                    final prefs = await SharedPreferences.getInstance();
+
+                    if (currentIndex < ecommercePages.length - 1) {
+                      // 👉 GO TO NEXT ONBOARDING PAGE
+                      _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    } else {
+                      // 👉 LAST PAGE → SAVE & NAVIGATE
+                      await prefs.setBool('seenOnboarding', true);
+                      Get.offAll(() => const Auth1Login());
+                    }
+                  },
+                  child: const Text(
+                    "Get Started",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),

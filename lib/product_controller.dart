@@ -7,20 +7,29 @@ import 'product_list.dart';
 class ProductController extends GetxController {
   // Products
   RxList<ProductModel> allProducts = <ProductModel>[].obs;
-  RxList<ProductModel> featuredProductList = <ProductModel>[].obs;
+  // RxList<ProductModel> featuredProductList = <ProductModel>[].obs;
+  var featuredProductList = <ProductModel>[].obs;
+  var cartList = <ProductModel>[].obs;
 
   // Categories
   RxList<CategoryModel> categoryList = <CategoryModel>[].obs;
 
-  // Favourites 
+  // Favourites
   RxList<ProductModel> favouriteList = <ProductModel>[].obs;
 
   // Cart
-  RxList<ProductModel> cartList = <ProductModel>[].obs;
+  //RxList<ProductModel> cartList = <ProductModel>[].obs;
 
   // Selected product
   Rx<ProductModel?> selectedProduct = Rx<ProductModel?>(null);
-  
+  RxInt currentStep = 2.obs; // shipped active (as per screenshot)
+
+  bool isActive(int step) => step <= currentStep.value;
+  RxBool isDefault = true.obs;
+
+  void toggleDefault(bool value) {
+    isDefault.value = value;
+  }
 
   get selectedCategory => null;
 
@@ -30,7 +39,7 @@ class ProductController extends GetxController {
 
     loadProducts();
     loadFavourites();
-    loadSaveAddress();
+    //loadSaveAddress();
 
     categoryList.assignAll([
       CategoryModel(image: "assets/vegetables.png", name: "Vegetables"),
@@ -42,23 +51,30 @@ class ProductController extends GetxController {
       CategoryModel(image: "assets/babycare.png", name: "Baby Care"),
     ]);
   }
-  // Save Address Switch
-  RxBool saveAddress = false.obs;
+  // // Save Address Switch
+  // RxBool saveAddress = false.obs;
 
-  // Toggle switch
-  void toggleSaveAddress(bool value) async {
-    saveAddress.value = value;
+  // // Toggle switch
+  // void toggleSaveAddress(bool value) async {
+  //   saveAddress.value = value;
 
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('save_address', value);
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('save_address', value);
+  // }
+
+  // // Load switch value
+  // Future<void> loadSaveAddress() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   saveAddress.value = prefs.getBool('save_address') ?? false;
+  // }
+  void updateQuantity(ProductModel product, int newQuantity) {
+    if (newQuantity < 1) return;
+
+    product.quantity = newQuantity as RxInt;
+
+    // 🔥 Force UI update
+    featuredProductList.refresh();
   }
-
-  // Load switch value
-  Future<void> loadSaveAddress() async {
-    final prefs = await SharedPreferences.getInstance();
-    saveAddress.value = prefs.getBool('save_address') ?? false;
-  }
-
 
   //  Load products
   void loadProducts() {
@@ -132,6 +148,18 @@ class ProductController extends GetxController {
     }
   }
 
+  void increaseQuantity(ProductModel product) {
+    product.quantity.value++;
+  }
+
+  void decreaseQuantity(ProductModel product) {
+    if (product.quantity.value > 1) {
+      product.quantity.value--;
+    }
+  }
+
+  
+
   //  Increase quantity
   void increases(ProductModel product) {
     product.quantity.value++;
@@ -147,8 +175,6 @@ class ProductController extends GetxController {
       print('a');
     }
   }
-
-  
 
   //  Remove item
   void deleteFromCart(ProductModel product) {

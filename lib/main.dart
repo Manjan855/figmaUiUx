@@ -1,4 +1,4 @@
-//import 'package:figmaproject/ecommerce_page.dart';
+import 'package:figmaproject/ecommerce_page.dart';
 //import 'package:figmaproject/order_success.dart';
 //import 'package:figmaproject/payment_method.dart';
 // import 'package:figmaproject/Auth1_Welcome.dart';
@@ -12,10 +12,20 @@
 //import 'package:figmaproject/Accountfolder/Credit_Cards.dart';
 //import 'package:figmaproject/Accountfolder/Notifications.dart';
 //import 'package:figmaproject/Accountfolder/Transactions.dart';
+
+//import 'package:figmaproject/Accountfolder/Add_Address.dart';
 //import 'package:figmaproject/Accountfolder/My_Adress.dart';
-import 'package:figmaproject/Accountfolder/Add_Address.dart';
+//import 'package:figmaproject/Apply_Filters.dart';
+//import 'package:figmaproject/Dummy_folder/Combined_page.dart';
+//import 'package:figmaproject/Forgot_Password.dart';
+//import 'package:figmaproject/Review.dart';
+//import 'package:figmaproject/Shipping_Method.dart';
+//import 'package:figmaproject/Track_oder.dart';
+//import 'package:figmaproject/Write_Review.dart';
+//import 'package:figmaproject/Verify_Number.dart';
 //import 'package:figmaproject/Accountfolder/My_Orders.dart';
 //import 'package:figmaproject/CategoriesFolder/Vegetables_Page.dart';
+
 import 'package:figmaproject/product_controller.dart';
 //import 'package:figmaproject/get_example/cart_page.dart';
 //import 'package:figmaproject/get_example/product_list.dart';
@@ -42,7 +52,7 @@ class MyApp extends StatelessWidget {
       //home: Auth1Welcome(),
       // home: HomePage(),
       // home: MyfavouritesPage(),
-      //home: EcommercePage(),
+      home: EcommercePage(),
       //home: BuyingPage(),
       // home: PaymentMethod(),
       // home: VegetablesPage(),
@@ -50,9 +60,16 @@ class MyApp extends StatelessWidget {
       //home: Notifications(),
       //home: Transactions(),
       //home: CreditCards(),
-      //home: MyAdress(),
+      // home: MyAdress(),
+      // home: ApplyFiltersPage(),
       // home: MyOrders(),
-      home: AddAddress(),
+      //home: AddAddress(),
+      // home: Review(),
+      // home: WriteReview(),
+      // home: TrackOrderPage(),
+      //home: ShippingMethod(),
+      //home: VerifyNumber(),
+      //home: ForgotPassword(),
       // home: AccountPage(),
       //home: CategoriesPage(),
       // home: OrderSuccess(),

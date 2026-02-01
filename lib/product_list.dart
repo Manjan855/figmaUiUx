@@ -310,7 +310,7 @@ class ProductModel {
     required this.quantity,
     required this.isFavourite,
     this.isNew = true,
-    this.istag = true,
+    this.istag = false,
     required this.description,
     required this.rating,
   });
@@ -324,12 +324,13 @@ final List<ProductModel> productList = [
     price: 2.22 * 4,
     unit: "1.50 lbs",
     isFavourite: true.obs,
-    isNew: false,
+    isNew: true,
     quantity: 1.obs,
 
     description:
         "Fresh broccoli is carefully harvested from trusted farms to ensure maximum freshness and nutrition. It has firm green florets and crisp stems with a mild, earthy flavor. Broccoli is rich in vitamins, fiber, and antioxidants, making it perfect for steaming, stir-frying, or adding to healthy meals.",
     rating: 4.5,
+    istag: false,
   ),
   ProductModel(
     productName: "Black Grapes",
@@ -353,6 +354,7 @@ final List<ProductModel> productList = [
     description:
         "Fresh avocados are harvested at the right stage to ensure a creamy texture and rich, buttery flavor. They have smooth green flesh that is packed with healthy fats and nutrients. Avocados are ideal for salads, spreads, smoothies, and making delicious guacamole.",
     rating: 4.7,
+    istag: false,
   ),
   ProductModel(
     productName: "Pineapple",
@@ -364,6 +366,7 @@ final List<ProductModel> productList = [
     description:
         "Fresh pineapple is sourced from tropical farms and ripened naturally for a sweet and juicy taste. It has golden flesh with a refreshing balance of sweetness and acidity. Pineapple is ideal for fresh snacking, juices, smoothies, desserts, and adds a bright flavor to both sweet and savory dishes.",
     rating: 4.7,
+    istag: false,
   ),
   ProductModel(
     productName: "Pomegranate",
@@ -371,6 +374,7 @@ final List<ProductModel> productList = [
     price: 2.22 * 4,
     unit: "1.5 lbs",
     isFavourite: true.obs,
+    istag: false,
     quantity: 1.obs,
     description:
         "Pomegranates are carefully selected for their deep color and juicy ruby-red seeds. Each fruit is packed with a sweet-tart flavor and rich antioxidants. Pomegranate seeds are perfect for fresh consumption, salads, juices, and garnishing dishes, providing both taste and health benefits.",
@@ -382,6 +386,7 @@ final List<ProductModel> productList = [
     price: 2.22 * 4,
     unit: "dozen",
     isFavourite: true.obs,
+    istag: false,
     quantity: 1.obs,
     description:
         "Fresh peaches are hand-picked at peak ripeness to deliver a soft, juicy texture and naturally sweet aroma. They have smooth skin with vibrant color and tender flesh inside. Peaches are perfect for fresh eating, baking, salads, and desserts, offering a delicious and refreshing experience.",
@@ -394,6 +399,7 @@ final List<ProductModel> productList = [
     unit: "dozen",
     isFavourite: true.obs,
     quantity: 1.obs,
+    istag: false,
     description:
         "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing",
     rating: 4.7,

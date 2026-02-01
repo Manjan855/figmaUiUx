@@ -1,3 +1,4 @@
+import 'package:figmaproject/Accountfolder/Account_Page.dart';
 import 'package:figmaproject/Categories_Page.dart';
 import 'package:figmaproject/MyFavourites_Page.dart';
 import 'package:figmaproject/product_controller.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ProductController controller = Get.find<ProductController>();
   final ScrollController _categoryController = ScrollController();
+  int quantity = 1;
 
   final List<String> bannerImages = [
     "assets/unsplash.png",
@@ -281,7 +283,7 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () {
                                   controller.toggleFavourite(p);
 
-                                  // ✅ Navigate AFTER toggling
+                                  //  Navigate AFTER toggling
                                   // Get.to(() => const MyfavouritesPage());
                                 },
                               ),
@@ -356,6 +358,45 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.decreaseQuantity(p);
+                                },
+                                child: const Icon(
+                                  Icons.remove,
+                                  size: 18,
+                                  color: Colors.green,
+                                ),
+                              ),
+
+                              const SizedBox(width: 8),
+
+                              Obx(
+                                () => Text(
+                                  p.quantity.value.toString(),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(width: 8),
+
+                              GestureDetector(
+                                onTap: () {
+                                  controller.increaseQuantity(p);
+                                },
+                                child: const Icon(
+                                  Icons.add,
+                                  size: 18,
+                                  color: Colors.green,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -387,7 +428,8 @@ class _HomePageState extends State<HomePage> {
                   SvgPicture.asset(
                     "assets/home.svg",
                     color: Colors.black,
-                    height: 12,
+                    height: 25,
+                    width: 25,
                   ),
                   GestureDetector(
                     onTap: () => Get.to(MyfavouritesPage()),
@@ -395,15 +437,27 @@ class _HomePageState extends State<HomePage> {
                     child: SvgPicture.asset(
                       "assets/heart.svg",
                       color: Colors.black,
-                      height: 12,
+                      height: 25,
+                      width: 25,
                     ),
                   ),
-                  SvgPicture.asset(
-                    "assets/bag.svg",
-                    color: Colors.black,
-                    height: 12,
+                  GestureDetector(
+                    onTap: () => Get.to(ProductListScreen()),
+                    child: SvgPicture.asset(
+                      "assets/bag.svg",
+                      color: Colors.black,
+                      height: 25,
+                      width: 25,
+                    ),
                   ),
-                  SvgPicture.asset("assets/user.svg", height: 24),
+                  GestureDetector(
+                    onTap: () => Get.to(AccountPage()),
+                    child: SvgPicture.asset(
+                      "assets/user.svg",
+                      height: 25,
+                      width: 25,
+                    ),
+                  ),
                 ],
               ),
             ),
