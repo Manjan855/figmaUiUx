@@ -1,4 +1,5 @@
 import 'package:figmaproject/Accountfolder/Account_Page.dart';
+import 'package:figmaproject/Accountfolder/Add_Address.dart';
 //import 'package:figmaproject/Accountfolder/Add_Address.dart';
 import 'package:figmaproject/product_controller.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _MyAdressState extends State<MyAdress> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.back();
+              Get.to(() => AddAddress());
             },
             icon: const Icon(Icons.add_circle_outline),
           ),
@@ -129,7 +130,10 @@ class _MyAdressState extends State<MyAdress> {
                       "assets/address.svg",
                       width: 20,
                       height: 20,
-                      color: Color(0xFF868889),
+                      colorFilter: ColorFilter.mode(
+                        Color(0xFF868889),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
@@ -221,7 +225,7 @@ class _MyAdressState extends State<MyAdress> {
                   () => Row(
                     children: [
                       Switch(
-                        activeColor: Colors.lightGreen,
+                        activeThumbColor: Colors.lightGreen,
                         value: controller.isDefault.value,
                         onChanged: controller.toggleDefault,
                       ),

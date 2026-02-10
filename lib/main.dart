@@ -1,4 +1,4 @@
-import 'package:figmaproject/ecommerce_page.dart';
+//import 'package:figmaproject/ecommerce_page.dart';
 //import 'package:figmaproject/order_success.dart';
 //import 'package:figmaproject/payment_method.dart';
 // import 'package:figmaproject/Auth1_Welcome.dart';
@@ -10,6 +10,7 @@ import 'package:figmaproject/ecommerce_page.dart';
 // import 'package:figmaproject/Account_Page.dart';
 //import 'package:figmaproject/Accountfolder/About_Me.dart';
 //import 'package:figmaproject/Accountfolder/Credit_Cards.dart';
+import 'package:figmaproject/Accountfolder/Add_Card.dart';
 //import 'package:figmaproject/Accountfolder/Notifications.dart';
 //import 'package:figmaproject/Accountfolder/Transactions.dart';
 
@@ -52,12 +53,13 @@ class MyApp extends StatelessWidget {
       //home: Auth1Welcome(),
       // home: HomePage(),
       // home: MyfavouritesPage(),
-      home: EcommercePage(),
+      //home: EcommercePage(),
       //home: BuyingPage(),
       // home: PaymentMethod(),
       // home: VegetablesPage(),
       // home: AboutMe(),
       //home: Notifications(),
+      home: AddCard(),
       //home: Transactions(),
       //home: CreditCards(),
       // home: MyAdress(),

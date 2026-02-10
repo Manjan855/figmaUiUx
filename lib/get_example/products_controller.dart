@@ -1,4 +1,5 @@
 import 'package:figmaproject/product_list.dart';
+import 'package:flutter/src/foundation/basic_types.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
@@ -9,6 +10,10 @@ class ProductController extends GetxController {
   Rxn<ProductModel> selectedProduct = Rxn();
 
   get favouriteList => null;
+
+  get shippingAddress => null;
+
+  ValueChanged<bool>? get toggleShippingAddress => null;
   @override
   void onInit() {
     // TODO: implement onInit

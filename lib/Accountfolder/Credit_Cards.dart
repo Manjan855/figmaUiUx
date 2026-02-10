@@ -1,4 +1,6 @@
 import 'package:figmaproject/Accountfolder/Account_Page.dart';
+import 'package:figmaproject/Accountfolder/Add_Card.dart';
+import 'package:figmaproject/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,6 +13,7 @@ class CreditCards extends StatefulWidget {
 }
 
 class _CreditCardsState extends State<CreditCards> {
+  final ProductController controller = Get.find<ProductController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +36,7 @@ class _CreditCardsState extends State<CreditCards> {
                   Expanded(
                     child: Center(
                       child: Text(
-                        "My Address",
+                        "My Credit Cards",
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -42,12 +45,14 @@ class _CreditCardsState extends State<CreditCards> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => AddCard());
+                    },
                     icon: Icon(Icons.add_circle_outline),
                   ),
                 ],
               ),
-              SizedBox(height: 23),
+              SizedBox(height: 23),     
               Padding(
                 padding: const EdgeInsets.only(left: 17, right: 17),
                 child: Container(
@@ -125,9 +130,15 @@ class _CreditCardsState extends State<CreditCards> {
                 padding: const EdgeInsets.only(left: 17, right: 17),
                 child: TextField(
                   decoration: InputDecoration(
+                    fillColor: Color(0xFFF4F5F9),
+                    filled: true,
                     border: OutlineInputBorder(),
                     labelText: "Russell Austin",
-                    prefixIcon: SvgPicture.asset("assets/user.svg"),
+                    prefixIcon: SvgPicture.asset(
+                      "assets/user.svg",
+                      height: 12,
+                      width: 12,
+                    ),
                   ),
                 ),
               ),
@@ -136,9 +147,15 @@ class _CreditCardsState extends State<CreditCards> {
                 padding: const EdgeInsets.only(left: 17, right: 17),
                 child: TextField(
                   decoration: InputDecoration(
+                    fillColor: Color(0xFFF4F5F9),
+                    filled: true,
                     border: OutlineInputBorder(),
                     labelText: "XXXX XXXX XXXX 5678",
-                    prefixIcon: SvgPicture.asset("assets/card1.svg"),
+                    prefixIcon: SvgPicture.asset(
+                      "assets/card1.svg",
+                      height: 12,
+                      width: 12,
+                    ),
                   ),
                 ),
               ),
@@ -150,9 +167,15 @@ class _CreditCardsState extends State<CreditCards> {
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
+                          fillColor: Color(0xFFF4F5F9),
+                          filled: true,
                           border: OutlineInputBorder(),
                           labelText: "01/22",
-                          prefixIcon: SvgPicture.asset("assets/calendar.svg"),
+                          prefixIcon: SvgPicture.asset(
+                            "assets/calendar.svg",
+                            height: 12,
+                            width: 12,
+                          ),
                         ),
                       ),
                     ),
@@ -160,9 +183,15 @@ class _CreditCardsState extends State<CreditCards> {
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
+                          fillColor: Color(0xFFF4F5F9),
+                          filled: true,
                           border: OutlineInputBorder(),
                           labelText: "908",
-                          prefixIcon: SvgPicture.asset("assets/lock.svg"),
+                          prefixIcon: SvgPicture.asset(
+                            "assets/lock.svg",
+                            height: 12,
+                            width: 12,
+                          ),
                         ),
                       ),
                     ),
@@ -170,21 +199,20 @@ class _CreditCardsState extends State<CreditCards> {
                 ),
               ),
               SizedBox(height: 19),
-              Padding(
-                padding: const EdgeInsets.only(left: 17, right: 17),
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  child: Row(
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Obx(
+                  () => Row(
                     children: [
-                      SvgPicture.asset(
-                        "assets/OnOff.svg",
-                        width: 20,
-                        height: 20,
+                      Switch(
+                        activeThumbColor: Colors.lightGreen,
+                        value: controller.isDefault.value,
+                        onChanged: controller.toggleDefault,
                       ),
                       const SizedBox(width: 8),
                       const Text(
-                        "Make a default",
-                        style: TextStyle(fontSize: 14),
+                        "Make default",
+                        style: TextStyle(fontSize: 12),
                       ),
                     ],
                   ),

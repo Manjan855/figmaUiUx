@@ -25,10 +25,41 @@ class ProductController extends GetxController {
   RxInt currentStep = 2.obs; // shipped active (as per screenshot)
 
   bool isActive(int step) => step <= currentStep.value;
-  RxBool isDefault = true.obs;
+  RxBool allowsNotifications = true.obs;
+  RxBool emailNotifications = true.obs;
+  RxBool orderNotifications = true.obs;
+  RxBool generalNotifications = true.obs;
+  RxBool isDefault = false.obs;
+  RxBool saveAddress = false.obs;
+  RxBool shippingAddress = false.obs;
+  void toggleShippingAddress(bool value) {
+    shippingAddress.value = value;
+  }
+  void toggleSaveAddress(bool value) async {
+    saveAddress.value = value;
+
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('save_address', value);
+  }
 
   void toggleDefault(bool value) {
     isDefault.value = value;
+  }
+
+  void toggleAllowsNotifications(bool value) {
+    allowsNotifications.value = value;
+  }
+
+  void toggleEmailNotifications(bool value) {
+    emailNotifications.value = value;
+  }
+
+  void toggleOrderNotifications(bool value) {
+    orderNotifications.value = value;
+  }
+
+  void toggleGeneralNotifications(bool value) {
+    generalNotifications.value = value;
   }
 
   get selectedCategory => null;
@@ -157,8 +188,6 @@ class ProductController extends GetxController {
       product.quantity.value--;
     }
   }
-
-  
 
   //  Increase quantity
   void increases(ProductModel product) {

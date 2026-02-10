@@ -1,6 +1,8 @@
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:figmaproject/get_example/products_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class ShippingAddress extends StatefulWidget {
   const ShippingAddress({super.key});
@@ -12,6 +14,7 @@ class ShippingAddress extends StatefulWidget {
 class _ShippingAddressState extends State<ShippingAddress> {
   int _activeStep = 2; // Payment step
   int selectedIndex = -1;
+  final ProductController controller = Get.find<ProductController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +54,6 @@ class _ShippingAddressState extends State<ShippingAddress> {
             ),
           ),
 
-          
-         
           IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
           Expanded(
             child: Center(
@@ -139,6 +140,24 @@ class _ShippingAddressState extends State<ShippingAddress> {
               ),
             ],
           ),
+          SizedBox(height: 12),
+          Obx(
+            () => Row(
+              children: [
+                Switch(
+                  activeThumbColor: Colors.lightGreen,
+                  value: controller.shippingAddress.value,
+                  onChanged: controller.toggleShippingAddress,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  "Save this address",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 12),
           Padding(
             padding: const EdgeInsets.only(left: 17, right: 17, bottom: 36),
             child: ElevatedButton(

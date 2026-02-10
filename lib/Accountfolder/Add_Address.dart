@@ -1,4 +1,5 @@
 import 'package:figmaproject/Accountfolder/My_Adress.dart';
+import 'package:figmaproject/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,8 @@ class AddAddress extends StatefulWidget {
 }
 
 class _AddAddressState extends State<AddAddress> {
-  RxBool saveAddress = false.obs;
+  
+  final ProductController controller = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
@@ -171,23 +173,27 @@ class _AddAddressState extends State<AddAddress> {
                 ),
               ),
 
-              // Row(
-              //   children: [
-              //     const Text(
-              //       "Save this address",
-              //       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-              //     ),
-              //     Obx(
-              //       () => Switch(
-              //         value: saveAddress.value,
-              //         onChanged: (value) {
-              //           saveAddress.value = value;
-              //         },
-              //         activeColor: Colors.green, // optional
-              //       ),
-              //     ),
-              //   ],
-              // ),
+              SizedBox(height: 12),
+              Obx(
+                () => Row(
+                  children: [
+                    Switch(
+                      activeThumbColor: Colors.lightGreen,
+                      value: controller.saveAddress.value,
+                      onChanged: controller.toggleSaveAddress,
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      "Save this address",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.only(left: 17, right: 17, bottom: 36),
                 child: ElevatedButton(
