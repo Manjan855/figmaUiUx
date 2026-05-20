@@ -6,6 +6,7 @@ import 'package:figmaproject/Accountfolder/Notifications.dart';
 import 'package:figmaproject/Accountfolder/Transactions.dart';
 import 'package:figmaproject/Home_Page.dart';
 import 'package:figmaproject/MyFavourites_Page.dart';
+import 'package:figmaproject/ecommerce_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -189,7 +190,10 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   ListTile(
                     leading: SvgPicture.asset("assets/signout.svg"),
-                    title: Text("Sign Out"),
+                    title: GestureDetector(
+                      onTap: () => Get.to(() => EcommercePage()),
+                      child: Text("Sign Out"),
+                    ),
                     // trailing: Icon(Icons.arrow_forward_ios),
                   ),
                 ],

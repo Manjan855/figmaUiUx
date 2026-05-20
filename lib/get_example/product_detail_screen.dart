@@ -28,7 +28,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ? Icon(Icons.favorite)
               : Icon(Icons.favorite_border),
 
-          /// 🔢 Quantity Selector
+        
           Obx(
             () => Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +57,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
           const SizedBox(height: 16),
 
-          /// 🛒 Add to cart
+        
           ElevatedButton(
             onPressed: () {
               controller.addToCart(product);

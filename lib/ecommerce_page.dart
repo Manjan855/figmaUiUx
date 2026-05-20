@@ -49,7 +49,7 @@ class _EcommercePageState extends State<EcommercePage> {
         statusBarIconBrightness: Brightness.light,
       ),
     );
-    Future.delayed(Duration(seconds: 5)).then((_) {
+    Future.delayed(Duration(seconds: 5000)).then((_) {
       _checkIfSeenOnboarding();
     });
   }
@@ -85,7 +85,7 @@ class _EcommercePageState extends State<EcommercePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Image.asset("assets/actionBar.png", height: 32),
+        //  title: Image.asset("assets/actionBar.png", height: 32),
       ),
       body: Stack(
         children: [
@@ -189,13 +189,11 @@ class _EcommercePageState extends State<EcommercePage> {
                     final prefs = await SharedPreferences.getInstance();
 
                     if (currentIndex < ecommercePages.length - 1) {
-                      // 👉 GO TO NEXT ONBOARDING PAGE
                       _pageController.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
                       );
                     } else {
-                      // 👉 LAST PAGE → SAVE & NAVIGATE
                       await prefs.setBool('seenOnboarding', true);
                       Get.offAll(() => const Auth1Login());
                     }
